@@ -1,10 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import React from 'react'
 
+
 import './App.css'
 import VendorDashBoard from './pages/VendorDashBoard'
 import MyAdPage from './pages/myAdsPage'
 import PostAd from './pages/postAdsForm'
+import Home from './pages/Home/Home'
 
 function App() {
   const   router = createBrowserRouter ([
@@ -21,6 +23,9 @@ function App() {
   path:'/post-ad',
   element:<PostAd/>
 }
+ {path:"/",
+  element:<Home/>,
+ },
 
 
     
