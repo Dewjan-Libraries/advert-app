@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from "../assets/images/image-22.png"
 
 
 const Navbar = () => {
@@ -49,9 +50,12 @@ const Navbar = () => {
             </div> */}
             <nav className="flex items-center justify-between p-10 bg-white shadow-lg z-30">
                 {/* Logo Section */}
-                <div className="flex items-center italic ">
-                    <span className="text-4xl font-bold text-lime-300 ">Dew</span>
-                    <span className="text-4xl font-bold text-gray-700">jan</span>
+                <div className="flex items-center space-x-2">
+
+                    <img className='h-20 w-38 object-contain' src={logo} alt="placeholder" />
+                    {/* <span className="text-4xl font-bold text-lime-300 ">Post</span>
+                    <span className="text-4xl font-bold text-gray-700">iize</span> */}
+
                 </div>
                 <div className="flex items-center space-x-2">
 
@@ -77,8 +81,8 @@ const Navbar = () => {
                     <div><button className="p-2 text-white w-28 bg-green-500 ">SEARCH</button></div>
                 </div>
                 <div className="flex items-center space-x-4 ">
-                   <button className='bg-green-500 p-2 w-20'>LOGIN</button>
-                    <button className='bg-green-500 p-2 w-24'>REGISTER</button>
+                    <button className='bg-green-500 p-2 text-white w-28 rounded-md'>LOGIN</button>
+                    <button className='border border-solid rounded-md border-green-400 hover:bg-green-500 transition duration-300 hover:text-white p-2 w-24'>REGISTER</button>
 
                 </div>
             </nav>
