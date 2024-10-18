@@ -22,7 +22,7 @@ function App() {
 {
   path:'/post-ad',
   element:<PostAd/>
-}
+},
  {path:"/",
   element:<Home/>,
  },
