@@ -8,6 +8,10 @@ import MyAdPage from './pages/myAdsPage'
 import PostAd from './pages/postAdsForm'
 import Home from './pages/Home/Home'
 
+
+import ProductList from './pages/DisplayCars'
+import ProductDetail from './pages/SingleAd'
+
 function App() {
   const   router = createBrowserRouter ([
 
@@ -26,6 +30,15 @@ function App() {
  {path:"/",
   element:<Home/>,
  },
+
+ {path:"/list",
+  element:<ProductList/>,
+ },
+
+ {path:"/product/:id",
+  element:<ProductDetail/>,
+ },
+ 
 
 
     
