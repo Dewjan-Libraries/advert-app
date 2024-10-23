@@ -1,0 +1,16 @@
+
+.bg-img{
+    background-image: url('./assets/images/bg6.png');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    /* object-fit: contain; */
+
+  
+}
+
+.glass{
+    background: rgba(34, 197, 94, 0.6);
+    /* background: rgba(255, 255, 255, 0.1); */
+    backdrop-filter: blur(10px);
+  }
