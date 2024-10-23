@@ -10,6 +10,10 @@ import Home from './pages/Home/Home'
 import Signup from './pages/SignUp'
 import Login from './pages/Login'
 
+
+import ProductList from './pages/DisplayCars'
+import ProductDetail from './pages/SingleAd'
+
 function App() {
   const   router = createBrowserRouter ([
 
@@ -38,6 +42,15 @@ function App() {
  {path:"/",
   element:<Home/>,
  },
+
+ {path:"/list",
+  element:<ProductList/>,
+ },
+
+ {path:"/product/:id",
+  element:<ProductDetail/>,
+ },
+ 
 
 
     
