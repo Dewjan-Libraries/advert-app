@@ -225,75 +225,81 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { IoGrid } from "react-icons/io5";
 import { FaList } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 const ProductList = () => {
-  // State for storing products fetched from the API
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [loading, setLoading] = useState(true);  
+  const [products, setProducts] = useState([]); // Store all products
+  const [filteredProducts, setFilteredProducts] = useState([]); // Store filtered products
+  const [loading, setLoading] = useState(true); // Loading state
 
-  // Local state to track filter inputs (without onChange)
   const [filterValues, setFilterValues] = useState({
     search: '',
     category: '',
     brandName: '',
     price: ''
-  });
+  }); // Local filter state
 
-  // State to control view mode (grid or list)
-  const [isGridView, setIsGridView] = useState(true);
-  
-  // Fetch data from the API on component mount
+  const [isGridView, setIsGridView] = useState(true); // Control grid or list view
+
+  // Fetch the URL parameters for search and category from the navbar
+  const [searchParams] = useSearchParams();
+
+  // Fetch products from the API when the component mounts
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/adverts`); 
-        setProducts(response.data); 
-        setFilteredProducts(response.data); 
-        setLoading(false); 
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/adverts`);
+        setProducts(response.data); // Store all products
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
-        setLoading(false); 
+        setLoading(false);
       }
     };
-
-    fetchProducts(); 
+    fetchProducts(); // Fetch products on mount
   }, []);
 
-  // Function to filter products when the user clicks search
-  const handleSearch = () => {
+  // Filter products based on search params (from URL) and sidebar filters
+  useEffect(() => {
+    const searchQuery = searchParams.get('search') || ''; // Get search from URL
+    const selectedCategory = searchParams.get('category') || ''; // Get category from URL
+
     let updatedProducts = products;
 
-    // Apply filtering logic
-    if (filterValues.search) {
+    // Filter by search query (URL or sidebar)
+    if (searchQuery || filterValues.search) {
+      const searchTerm = filterValues.search || searchQuery;
       updatedProducts = updatedProducts.filter(product =>
-        product.title.toLowerCase().includes(filterValues.search.toLowerCase())
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
+    // Filter by category (URL or sidebar)
+    if (selectedCategory || filterValues.category) {
+      const category = filterValues.category || selectedCategory;
+      updatedProducts = updatedProducts.filter(product =>
+        product.category === category
+      );
+    }
+
+    // Filter by brand (sidebar)
     if (filterValues.brandName) {
       updatedProducts = updatedProducts.filter(product =>
         product.brandName === filterValues.brandName
       );
     }
 
-    if (filterValues.category) {
-      updatedProducts = updatedProducts.filter(product =>
-        product.category === filterValues.category
-      );
-    }
-
+    // Filter by max price (sidebar)
     if (filterValues.price) {
       updatedProducts = updatedProducts.filter(product =>
         product.price <= parseFloat(filterValues.price)
       );
     }
 
-    // Update the displayed products
+    // Update the filtered products
     setFilteredProducts(updatedProducts);
-  };
+  }, [products, searchParams, filterValues]); // Trigger filter when products or filters change
 
   // Loading state
   if (loading) {
@@ -302,9 +308,11 @@ const ProductList = () => {
 
   return (
     <div className="flex">
-      {/* Sidebar */}
+      {/* Sidebar with filters */}
       <div className="w-1/4 p-4 md:p-8 sm:p-2 bg-lime-50">
-        {/* Filter inputs without onChange */}
+        <h2 className="font-bold text-lg mb-4">Filters</h2>
+
+        {/* Search by Title */}
         <div className="mb-4">
           <input
             type="text"
@@ -316,6 +324,7 @@ const ProductList = () => {
           />
         </div>
 
+        {/* Filter by Category */}
         <div className="mb-4">
           <select
             name="category"
@@ -331,6 +340,7 @@ const ProductList = () => {
           </select>
         </div>
 
+        {/* Filter by Brand */}
         <div className="mb-4">
           <select
             name="brand"
@@ -347,6 +357,7 @@ const ProductList = () => {
           </select>
         </div>
 
+        {/* Filter by Max Price */}
         <div className="mb-4">
           <input
             type="number"
@@ -360,7 +371,7 @@ const ProductList = () => {
 
         {/* Search Button */}
         <button
-          onClick={handleSearch}
+          onClick={() => setFilteredProducts(filteredProducts)} // Apply the filters
           className="w-full bg-green-400 text-white p-2 rounded hover:bg-green-600"
         >
           Search
@@ -373,7 +384,7 @@ const ProductList = () => {
           <Link className="font-bold text-3xl" to={"/"} >
             <IoArrowBackCircleOutline />
           </Link>
-          <h2 className='items-center justify-center font-bold text-3xl'>
+          <h2 className="items-center justify-center font-bold text-3xl">
             ALL ADVERTS
           </h2>
 
@@ -403,9 +414,9 @@ const ProductList = () => {
                 className={`border p-4 rounded ${isGridView ? '' : 'flex items-center space-x-4'}`}
               >
                 <img
-                  src={`https://savefiles.org/secure/uploads/19355?shareable_link=449`} // Display the image or a default one
+                  src={`https://savefiles.org/secure/uploads/19355?shareable_link=449`} // Display the image or fallback to a default
                   alt={product.title}
-                  className={isGridView ? 'mb-4' : 'w-16 h-16'}
+                  className={isGridView ? 'mb-4' : 'w-80 h-40'}
                 />
                 <div>
                   <h3 className="font-bold mb-2">{product.title}</h3>
