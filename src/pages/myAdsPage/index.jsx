@@ -1,41 +1,97 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiGetAd } from "../../services/auth";
 import { Link } from "react-router-dom";
-import Sidebar from "../../components/Sidebar";
 
-const MyAdPage = () => {
+const MyAdverts = () => {
+  const handleSubmit = async (event) => event.preventDefault();
+    
+  const [adverts, setAdverts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  
+  // navigate("/login")
+
+  useEffect(() => {
+    const fetchAdverts = async () => {
+      try {
+      
+        const vendorAdverts = await apiGetAd()
+        
+        setAdverts(vendorAdverts.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to load adverts.");
+        setLoading(false);
+      }
+    };
+
+  
+    if (token) {
+      fetchAdverts();
+    }
+  }, [token]);
+
+  if (loading) {
+  
+    return <div>Loading adverts...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+
+  if (adverts.length === 0) {
+    return <div>No adverts found.</div>;
+  }
+
   return (
-    <div className="flex  bg-green-100">
-      <Sidebar />
-      <div className="h-[100vh] w-[100vw] lg-w-[100vw] p-10 bg-green-100">
-        {/* <Link to="/vendor-dashboard" className="rounded-lg bg-slate-100 p-2" >DashBoard icon</Link> */}
+    <div className=" bg-green-100">
+      {/* <Sidebar /> */}
+    {/* <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md">  */}
+      <h1 className="text-4xl flex justify-center font-bold p-10 ">My Products</h1>
+      <div className="grid grid-cols-3 gap-5 p-5">
+        {
+        adverts.map((advert, index) => (
+      <Link to={`/myaddetail/${advert.id}`} key={index}>
+      <div onSubmit={handleSubmit} key={index} className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg shadow-2xl p-8 space-y-4 glass">
+             <img className="p-2 border-2"
+              src={`https://savefiles.org/${advert.image}?shareable_link=449`}
+              alt={advert.title}
+           
+            />
+            <h2 className="text-2xl font-semibold">Product: {advert.title}</h2>
+            <p className="text-2xl font-semibold">Category: {advert.category}</p>
+            <p className="text-2xl font-semibold">Condition: {advert.condition}</p>
+            <p className="text-2xl font-semibold">Price: $ {advert.price}</p>
+            <p className="text-2xl font-semibold">Brand: {advert.brandName}</p>
+            <p className="text-2xl font-semibold">Description: {advert.description}</p>
 
-        <div className="grid grid-cols-2 w-[70%] h-[200px] border-black ml-48 bg-white">
-          <img className="p-2" src="" alt="item" />
-          <div className=" leading-10 p-5">
-            <h1>Title:</h1>
-            <p>Category:</p>
-            <p>Price:</p>
+           
           </div>
-          <div className="">
-            <button className=" m-10 p-2 rounded-lg bg-green-400" type="submit">
-              edit
-            </button>
-            <button className=" m-10 rounded-lg p-2 bg-green-400" type="submit">
-              delete
-            </button>
-          </div>
-        </div>
+      </Link>
+          
+))}
       </div>
     </div>
+  
   );
 };
 
-export default MyAdPage;
+export default MyAdverts;
 
-{
-  /* <div>
-<h1>{item.title}</h1>
-<p>Created At:{item.time?.name}</p>
-<p>Price:{item.price?.name}</p>
-</div> */
-}
+
+ /* <Link to={`/edit/${ad.id}`}> */
+//             <Link to="/edit">
+//             <button className="lg:m-10 p-2 font-bold rounded-lg bg-green-400" type="submit">
+//               Edit
+//             </button>
+//             </Link>
+//             <button  onClick={() => handleDeleteAd(ad.id)} className=" lg:m-10 rounded-lg p-2 bg-green-400" type="submit">
+//               delete
+//             </button>
+//           </div>
