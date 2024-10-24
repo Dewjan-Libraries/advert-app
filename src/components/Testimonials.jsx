@@ -3,7 +3,9 @@ import React from 'react'
 const Testimonials = () => {
     return (
         <div className="bg-[#37415204] py-16  flex flex-row items-center justify-center min-h-screen">
+            
         <div className="grid grid-row-1 sm:grid-row-2 lg:grid-row-2 gap-4 max-w-5xl px-4">
+        <h1 className='text-center font-serif text-3xl font-semibold'>TESTIMONIALS</h1>
             {/* Testimonial 1 */}
             <div className="bg-white shadow-lg rounded-lg p-6">
                 <p className="text-gray-700 text-lg italic mb-4">
