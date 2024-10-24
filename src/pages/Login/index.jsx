@@ -1,6 +1,6 @@
 import React from "react";
-import { apiLogin } from "../../services/auth";
-// import { Link } from "react-router-dom";
+import { apiLogin, apiGetProfile } from "../../services/auth";
+import { Link } from "react-router-dom";
 
 // import { toast } from "react-toastify";
 
@@ -17,8 +17,18 @@ const Login = () => {
 
     //if your staus is 200 meaning good. so this tells the brower to save thhe password
 
-    if (response.status === 200) {
-      localStorage.setItem("token", response.data.accessToken); //the name of the access token must match the one in the doc
+    try {
+
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.accessToken); //the name of the access token must match the one in the doc
+
+        //get user profile
+
+        // const profileResponse = await apiGetProfile()
+        // console.log(profileResponse.data)
+      }
+    } catch (error) {
+      
     }
 
   };
@@ -57,7 +67,7 @@ const Login = () => {
             />
           </div>
 
-          {/* <Link to="/vendor-dashboard"> */}
+          <Link to="/vendor-dashboard">
           <button
             type="submit"
             className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-900 transition duration-200"
@@ -71,7 +81,7 @@ const Login = () => {
             >
              {loading ? "loading...." "Login"} 
             </button> */}
-          {/* </Link> */}
+          </Link>
         </form>
       </div>
     </div>

@@ -3,16 +3,19 @@ import React from 'react'
 
 
 import './App.css'
-import VendorDashBoard from './pages/VendorDashBoard'
-import MyAdPage from './pages/myAdsPage'
+
+
 import PostAd from './pages/postAdsForm'
 import Home from './pages/Home/Home'
 import Signup from './pages/SignUp'
 import Login from './pages/Login'
-
-
+import EditAd from './pages/editadvert'
+import VendorDashBoard from './pages/VendorDashBoard'
 import ProductList from './pages/DisplayCars'
 import ProductDetail from './pages/SingleAd'
+import MyAdverts from './pages/myAdsPage'
+import AdDetail from './pages/AdvertDetails'
+
 
 function App() {
   const   router = createBrowserRouter ([
@@ -23,8 +26,13 @@ function App() {
 },
 {
   path:'/myads',
-  element:<MyAdPage/>
+  element:<MyAdverts/>
 },
+{
+  path:'/myaddetail/:id',
+  element:<AdDetail/>
+},
+
 {
   path:'/post-ad',
   element:<PostAd/>
@@ -50,6 +58,10 @@ function App() {
  {path:"/product/:id",
   element:<ProductDetail/>,
  },
+ {path:"/edit/:id",
+  element:<EditAd/>,
+ },
+
  
 
 
