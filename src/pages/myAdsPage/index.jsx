@@ -70,7 +70,7 @@ const MyAdverts = () => {
             <p className="text-1xl ">Condition: {advert.condition}</p>
             <p className="text-1xl">Price: $ {advert.price}</p>
             <p className="text-1xl ">Brand: {advert.brandName}</p>
-            <p className="text-xl ">Description: {advert.description}</p>
+            <p className="text-1xl ">Description: {advert.description}</p>
 
            
           </div>
