@@ -14,3 +14,46 @@
     /* background: rgba(255, 255, 255, 0.1); */
     backdrop-filter: blur(10px);
   }
+
+  /* AdDetail.css */
+.ad-detail-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.ad-detail-container img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.ad-detail-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ad-detail-container p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.ad-detail-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ad-detail-container .edit-button {
+    background-color: green;
+    color: white;
+}
+
+.ad-detail-container .delete-button {
+    background-color: red;
+    color: white;
+}

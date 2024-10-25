@@ -129,7 +129,7 @@ const SignUp = () => {
             />
           </div>
 
-          {/* <Link to="/vendor-dashboard"> */}
+          <Link to="/vendor-dashboard">
           <button
             type="submit"
             className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-900 transition duration-200"
@@ -143,7 +143,7 @@ const SignUp = () => {
             >
              {loading ? "loading...." "SignUp"} 
             </button> */}
-          {/* </Link> */}
+          </Link>
         </form>
 
         {/* <div className="text-center mt-4">
