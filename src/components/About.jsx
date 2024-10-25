@@ -4,7 +4,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div>
+    <div id='offers'>
         <h1 className='text-center font-serif text-3xl font-semibold mt-10'>OUR OFFERS</h1>
       <div className='grid grid-cols-3 gap-5 items-center justify-center p-14 leading-loose bg-white '>
       
