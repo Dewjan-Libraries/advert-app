@@ -14,10 +14,11 @@ const Navbar = () => {
 
                 {/* Search Section */}
                 <div className="flex items-center  space-x-2">
-                    <ul className='flex justify-between gap-5 font-semibold text-gray-800 text-xl'>
-                        <li className=''>HOME</li>
-                        <li>TESTIMONIALS</li>
-                        <li>OFFERS</li>
+                    <ul className='flex justify-between gap-5 font-semibold text-gray-800 text-lg'>
+                    <li><a href="#home">HOME</a> </li>
+                    <li><a href="#testimonials">TESTIMONIALS</a> </li>
+                    <li><a href="#offers">OFFERS</a> </li>
+                    <li><a href="#contact">CONTACT</a> </li>
                     </ul>
 
                     {/* <input
@@ -31,19 +32,11 @@ const Navbar = () => {
 
                 {/* Login/Signup Section */}
                 <div className="flex items-center space-x-4">
-                <div>
-                        <Link
-                            type='submit' 
-                            className="p-3  text-white w-28 bg-green-500"
-                            to={"/list"}
-                        >
-                            GET STARTED
-                        </Link>
-                    </div>
+              
 
-                    <Link className="bg-green-500 p-2 text-white text-center  w-28 rounded-md"to={"/login"} >LOGIN</Link>
+                    <Link className="bg-green-500 p-3 text-white text-center font-medium text-xl w-28 rounded-md"to={"/login"} >LOGIN</Link>
                     
-                    <Link className="border border-solid  text-center rounded-md border-green-400 hover:bg-green-500 transition duration-300 hover:text-white p-2 w-24" to={"/sign-up"}>
+                    <Link className="border border-solid text-xl font-medium text-center rounded-md border-green-400 hover:bg-green-500 transition duration-300 hover:text-white p-3 w-28" to={"/sign-up"}>
                         SIGN UP
                     </Link>
 

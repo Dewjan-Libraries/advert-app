@@ -2,6 +2,7 @@ import React from 'react'
 
 const Testimonials = () => {
     return (
+        <div id='testimonials'>
         <div className="bg-[#37415204] py-16  flex flex-row items-center justify-center min-h-screen">
             
         <div className="grid grid-row-1 sm:grid-row-2 lg:grid-row-2 gap-4 max-w-5xl px-4">
@@ -38,6 +39,7 @@ const Testimonials = () => {
                 <h6 className="font-bold text-gray-900">Jacquiline Offei, Content Creator</h6>
             </div>
         </div>
+    </div>
     </div>
 );
 }
