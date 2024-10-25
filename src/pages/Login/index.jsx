@@ -1,5 +1,5 @@
 import React from "react";
-import { apiLogin, apiGetProfile } from "../../services/auth";
+import { apiLogin} from "../../services/auth";
 import { Link } from "react-router-dom";
 
 // import { toast } from "react-toastify";
